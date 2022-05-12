@@ -1,0 +1,81 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+        
+        <title>Dashboard Home</title>
+    </head>
+
+    <body>
+        <div class="side-nav">
+            <a href="https://www.heykona.com/" target="_blank">Kona</a>
+            <hr>
+            <a href="/">Home</a>
+            <a href="/greens_by_date">Greens by Date</a>
+            <a href="/greens_by_team">Greens by Team</a>
+            <a href="/emot_by_date">Most Common Emotions</a>
+            <a href="/num_check_ins">Check Ins by Date</a>
+        </div>
+
+        <div id="content", name="content", class="main">
+            {% block content %}
+                {% if status.status %}
+                    <div class="main_card">
+                        <h1>
+                            Welcome to your <span class='red'>red </span> <span class='yellow'>yellow </span> <span class='green'>green </span> dashboard! View Summary statistics below, or click on the sidebar links for charts which may provide more insight on the well being of your teams!
+                        </h1>
+                    </div>
+                    <div class="card-collection">
+                        <div class="card">
+                            <h4>
+                                Today's Green Flag Percentage:
+                            </h4>
+                            {{status.recent_green_perc}}
+                        </div>
+                        <div class="card">
+                            <h4>
+                                Most Green Team:
+                            </h4>
+                            {{status.most_green_team}}
+                        </div>
+                        <div class="card">
+                            <h4>
+                                Most Common Emotion:
+                            </h4>
+                            {{status.most_common_emotion}}
+                        </div>
+                        <div class="card">
+                            <h4>
+                                Number of Check Ins Today:
+                            </h4>
+                            {{status.num_check_ins}}
+                        </div>
+                    </div>
+                {% endif %}
+                {% if status == 'greens_by_date' %}
+                    <div class="first_img">
+                        <img src="{% static "green_by_date.png" %}">
+                    </div>                   
+                {% endif %}
+                {% if status == 'greens_by_team' %}
+                    <div class="first_img">
+                        <img src="{% static "green_by_team.png" %}">
+                    </div>                   
+                {% endif %}
+                {% if status == 'emot_by_date' %}
+                    <div class="first_img">
+                        <img src="{% static "emot_by_date.png" %}">
+                    </div>                   
+                {% endif %}
+                {% if status == 'num_check_ins' %}
+                    <div class="first_img">
+                        <img src="{% static "num_check_ins.png" %}">
+                    </div>                   
+                {% endif %}
+            {% endblock content %}
+        </div>
+    </body>
+</html>
